@@ -7,6 +7,15 @@ import org.testng.annotations.Test;
 
 public class DropdownTest extends TestBase {
 
+    @Test(description = "Проверка начального значения выпадающего списка")
+    public void testDropdownDefaultOption() {
+        DropdownPage page = new DropdownPage(driver, wait);
+        page.open();
+
+        Assert.assertEquals(page.getFirstSelectedOptionText(), "Please select an option",
+                "При открытии должен быть выбран placeholder");
+    }
+
     @Test(description = "Проверка наличия всех элементов в выпадающем списке")
     public void testDropdownElementsPresence() {
         DropdownPage page = new DropdownPage(driver, wait);
