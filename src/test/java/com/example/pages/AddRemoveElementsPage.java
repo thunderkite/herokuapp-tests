@@ -9,7 +9,6 @@ public class AddRemoveElementsPage {
     private final WebDriver driver;
     private final WebDriverWait wait;
 
-    // Локаторы согласно заданию
     private final By addElementBtn = By.xpath("//button[text()='Add Element']");
     private final By deleteBtn = By.xpath("//button[text()='Delete']");
 
@@ -23,7 +22,12 @@ public class AddRemoveElementsPage {
     }
 
     public void clickAddElement() {
+        clickAddElementAndWaitForCount(getDeleteButtonsCount() + 1);
+    }
+
+    private void clickAddElementAndWaitForCount(int expectedCount) {
         wait.until(ExpectedConditions.elementToBeClickable(addElementBtn)).click();
+        wait.until(ExpectedConditions.numberOfElementsToBe(deleteBtn, expectedCount));
     }
 
     public void clickFirstDeleteElement() {
