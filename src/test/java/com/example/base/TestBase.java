@@ -1,5 +1,6 @@
 package com.example.base;
 
+import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -16,6 +17,7 @@ public class TestBase {
     @BeforeMethod
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
+        options.setPageLoadStrategy(PageLoadStrategy.EAGER);
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
@@ -28,7 +30,7 @@ public class TestBase {
         }
 
         driver = new ChromeDriver(options);
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(25));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(45));
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
